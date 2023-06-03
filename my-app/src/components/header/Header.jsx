@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link, useLocation, Outlet, useParams } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link, useLocation, Outlet, useParams } from 'react-router-dom';
 import React from 'react';
 import Login from '../main/Login';
 import Logo from '../../assets/Logo-hodu.png';

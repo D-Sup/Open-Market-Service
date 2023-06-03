@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/Open-Market-Service/static/js/main.7ac7cd21.js",
+    "main.js": "/Open-Market-Service/static/js/main.9f9c6763.js",
     "static/media/Loading.gif": "/Open-Market-Service/static/media/Loading.3f6ea0a748e5b44ee2f0.gif",
     "static/media/icon-shopping-cart.svg": "/Open-Market-Service/static/media/icon-shopping-cart.fb559eef06cbd36853bca34c03d0dc36.svg",
     "static/media/icon-user.svg": "/Open-Market-Service/static/media/icon-user.d6e6542c29daf583e08e85e50438081c.svg",
@@ -8,9 +8,9 @@
     "index.html": "/Open-Market-Service/index.html",
     "static/media/icon-swiper-1.svg": "/Open-Market-Service/static/media/icon-swiper-1.778f2e2d9172d7a1ab2b2e8a26d80051.svg",
     "static/media/icon-swiper-2.svg": "/Open-Market-Service/static/media/icon-swiper-2.52e866003f901787c3ec676e65560343.svg",
-    "main.7ac7cd21.js.map": "/Open-Market-Service/static/js/main.7ac7cd21.js.map"
+    "main.9f9c6763.js.map": "/Open-Market-Service/static/js/main.9f9c6763.js.map"
   },
   "entrypoints": [
-    "static/js/main.7ac7cd21.js"
+    "static/js/main.9f9c6763.js"
   ]
 }

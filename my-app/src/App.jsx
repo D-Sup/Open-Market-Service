@@ -1,5 +1,5 @@
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   Link,
@@ -19,12 +19,12 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Home isLogin={isLogin} setIsLogin={setIsLogin}/>} />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
