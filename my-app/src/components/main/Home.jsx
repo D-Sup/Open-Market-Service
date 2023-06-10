@@ -4,20 +4,14 @@ import Slider from './Slider';
 import Header from '../header/Header';
 import styled from 'styled-components';
 
-export default function Home({ isLogin, setIsLogin }) {
-  const [posts, setPosts] = useState([]);
+export default function Home() {
   const [loading, setLoading] = useState(false);
-
-  function handleLogout() {
-    localStorage.clear();
-    setIsLogin(false);
-  }
 
   return (
     <MainStyle>
-      <Header isLogin={isLogin} handleLogout={handleLogout} />
-      <Slider posts={posts} loading={loading} />
-      <Posts posts={posts} setPosts={setPosts} loading={loading} setLoading={setLoading} />
+      <Header />
+      <Slider loading={loading} />
+      <Posts loading={loading} setLoading={setLoading} />
     </MainStyle>
   );
 }

@@ -1,17 +1,21 @@
-import { HashRouter, Routes, Route, Link, useLocation, Outlet, useParams } from 'react-router-dom';
-import React from 'react';
-import Login from '../main/Login';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
 import Logo from '../../assets/Logo-hodu.png';
 import IconShopping from '../../assets/icon-shopping-cart.svg';
 import IconUser from '../../assets/icon-user.svg';
 import IconSearch from '../../assets/icon-search.svg';
 import styled from 'styled-components';
+import { AppContext } from '../main/AppContext';
 
-export default function Header({ isLogin, handleLogout }) {
+export default function Header() {
+
+  const { isLogin, setIsLogin } = useContext(AppContext);
+  const navigate = useNavigate();
+  
   return (
     <HeaderStyle>
       <div className="header-left">
-        <img className="logo-img" src={Logo} alt="" />
+        <img className="logo-img" src={Logo} alt="" onClick={()=>navigate('/')}/>
         <form>
           <label className="a11y-hidden" htmlFor="searchProduct"></label>
           <input type="text" id="searchProduct" placeholder="상품을 검색해보세요!" />
@@ -22,15 +26,18 @@ export default function Header({ isLogin, handleLogout }) {
       </div>
 
       <div>
-        <a href={undefined}>
+        <Link to='/shopping-cart/' >
           <img src={IconShopping} alt="" />
           <br />
           <span>장바구니</span>
-        </a>
+        </Link>
         {isLogin ? (
-          <a href={undefined} onClick={handleLogout}>
+          <a href={undefined} onClick={()=>{
+            setIsLogin(false);
+            localStorage.clear();
+            }}>
             <img src={IconUser} alt="" />
-            <br />
+            <br />  
             <span>로그아웃</span>
           </a>
         ) : (
@@ -58,6 +65,7 @@ const HeaderStyle = styled.header`
   }
 
   .logo-img {
+    cursor: pointer;
     width: 124px;
     height: 38px;
   }

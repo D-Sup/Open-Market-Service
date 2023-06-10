@@ -1,18 +1,11 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  useLocation,
-  Outlet,
-  useParams,
-  useNavigate
-} from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from "./AppContext";
 import styled from 'styled-components';
 import Logo from '../../assets/Logo-hodu.png';
 
-export default function Login({ setIsLogin }) {
+export default function Login() {
+  const { setIsLogin } = useContext(AppContext);
   const [selectedButton, setSelectedButton] = useState('BUYER');
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import IconSwiperLeft from '../../assets/icon-swiper-1.svg';
 import IconSwiperRight from '../../assets/icon-swiper-2.svg';
+import { AppContext } from './AppContext';
 
-export default function Slider({ posts, loading }) {
+export default function Slider({ loading }) {
   const [translateXValue, setTranslateXValue] = useState(0);
+  const { posts } = useContext(AppContext);
 
   const handleSwiperLeftClick = () => {
     translateXValue === 0 ? setTranslateXValue(-1400) : setTranslateXValue(translateXValue + 100);

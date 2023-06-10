@@ -1,41 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
 import Pagination from './Pagination';
+import { GetProductsPage } from '../API/GetProductsPage';
 import useScrollBottom from '../../hook/useScrollBottom';
 import styled from 'styled-components';
-import LoadingGif from '../../assets/Loading.gif'
+import { AppContext } from './AppContext';
 
-export default function Posts({ posts, setPosts, loading, setLoading }) {
-
+export default function Posts({ loading, setLoading }) {
+  const { posts, setPosts } = useContext(AppContext);
   const [postCount, setPostCount] = useState(1);
   const [limit, setLimit] = useState(1);
   const [page, setPage] = useState(1);
   const isBottom = useScrollBottom();
 
-  async function getProducts() {
-    try {
-      const response = await fetch(`https://openmarket.weniv.co.kr/products/?page=${page}`);
-      if (!response.ok) {
-        throw new Error('네트워크에 이상이 있음');
-      }
-      const json = await response.json();
-      setPostCount(json.count);
+  const navigate = useNavigate();
 
-      limit === 1 ? setPosts(prevValue => [...prevValue, ...json.results]) : setPosts(json.results);
-      setLoading(true);
-    } catch (error) {
-      console.error(error);
-      setLoading(true);
-    }
+  function GoToProduct(product_id, item) {
+    navigate(`/products/${product_id}`, {
+      state: {
+        item: item,
+      },
+    });
   }
 
   useEffect(() => {
     if (isBottom && limit === 1) {
       setPage(prevValue => prevValue + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isBottom]);
 
   useEffect(() => {
-    getProducts();
+    GetProductsPage({ setPosts, setLoading, setPostCount, page, limit })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, limit]);
 
   return (
@@ -59,26 +56,25 @@ export default function Posts({ posts, setPosts, loading, setLoading }) {
           </button>
         </ul>
       </nav>
-        <ul className="item-card">
-          {loading &&
-            posts.map(item => {
-              return (
-                <li key={item.product_id}>
-                  <img src={item.image} alt="" />
-                  <p>{item.store_name}</p>
-                  <h2>{item.product_name}</h2>
-                  <strong>{Intl.NumberFormat().format(item.price)}</strong> 원
-                </li>
-              );
-            })}
-        </ul>
+      <ul className="item-card">
+        {loading &&
+          posts.map(item => {
+            return (
+              <li key={item.product_id} onClick={() => GoToProduct(item.product_id, item)}>
+                <img src={item.image} alt="" />
+                <p>{item.store_name}</p>
+                <h2>{item.product_name}</h2>
+                <strong>{Intl.NumberFormat().format(item.price)}</strong> 원
+              </li>
+            );
+          })}
+      </ul>
       {limit === 2 && <Pagination postCount={postCount} setPage={setPage} page={page} />}
     </PostStyle>
   );
 }
 
 const PostStyle = styled.div`
-
   nav {
     text-align: center;
     margin-top: 30px;
@@ -90,7 +86,7 @@ const PostStyle = styled.div`
       border-radius: 10px;
       margin: 0 3px;
       padding: 10px 15px;
-      transition: .2s;
+      transition: 0.2s;
     }
   }
 
@@ -126,7 +122,7 @@ const PostStyle = styled.div`
       font-size: 24px;
     }
   }
-  
+
   .active {
     background-color: gold;
   }
